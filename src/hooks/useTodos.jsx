@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import todosMock from '../mocks/todos.json'
 import { getTodos } from '../services/todos'
 
-const useTodos = () => {
+const useTodos = (filter) => {
   const [todos, setTodos] = useState([])
 
   useEffect(() => {
@@ -18,7 +18,17 @@ const useTodos = () => {
     }
   }, [])
 
-  return { todos, setTodos }
+  const filteredTodos = todos.filter((todo) => {
+    if (filter === 'completed') {
+      return todo.completed
+    } else if (filter === 'uncompleted') {
+      return !todo.completed
+    } else {
+      return true
+    }
+  })
+
+  return { todos: filteredTodos, setTodos }
 }
 
 export default useTodos

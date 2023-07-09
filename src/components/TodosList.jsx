@@ -1,13 +1,12 @@
+import PropTypes from 'prop-types'
 import Table from 'react-bootstrap/Table'
 import Alert from 'react-bootstrap/Alert'
 import { useState, useRef } from 'react'
-import useTodos from '../hooks/useTodos'
 import DeleteTodoModal from './DeleteTodoModal'
 import UpdateTodoModal from './UpdateTodoModal'
 import { updateTodoById } from '../services/todos'
 
-const TodosList = () => {
-  const { todos, setTodos } = useTodos()
+const TodosList = ({ todos, setTodos }) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false)
   const [showUpdateModal, setShowUpdateModal] = useState(false)
   const selectedTodo = useRef({})
@@ -62,8 +61,8 @@ const TodosList = () => {
       <Table className="primary align-middle table-hover ">
         <thead className="table-secondary">
           <tr>
-            <th>Asunto</th>
-            <th>Completado</th>
+            <th>Tareas</th>
+            <th>Estado</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -125,6 +124,11 @@ const TodosList = () => {
       />
     </div>
   )
+}
+
+TodosList.propTypes = {
+  todos: PropTypes.array.isRequired,
+  setTodos: PropTypes.func.isRequired,
 }
 
 export default TodosList

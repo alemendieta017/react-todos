@@ -13,6 +13,8 @@ export async function getTodos() {
 export async function addTodo(payload) {
   if (!payload.title) {
     throw new Error('El título es obligatorio')
+  } else if (!payload.title.match(/^[^\d]*$/)) {
+    throw new Error('El título no puede contener números')
   }
 
   try {

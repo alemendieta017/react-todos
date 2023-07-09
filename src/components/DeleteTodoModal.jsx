@@ -38,7 +38,7 @@ function DeleteTodoModal({
         <Modal.Title>Eliminar tarea</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>Desea eliminar tarea? Id: {selectedTodo.id}</p>
+        <p>Desea eliminar tarea? Id: {selectedTodo.current.id}</p>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>

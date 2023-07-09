@@ -5,15 +5,15 @@ import Modal from 'react-bootstrap/Modal'
 import { Form } from 'react-bootstrap'
 import { addTodo } from '../services/todos'
 import Alert from 'react-bootstrap/Alert'
-import useTodos from '../hooks/useTodos'
 
-function AddTodoModal({ show, setShow }) {
-  const { todos, setTodos } = useTodos()
+function AddTodoModal({ show, setShow, todos, setTodos }) {
   const [msg, setMsg] = useState(null)
+  const [newTitle, setNewTitle] = useState('')
 
   const handleClose = () => {
     setMsg(null)
     setShow(false)
+    setNewTitle('')
   }
 
   const handleSubmit = async (e) => {
@@ -26,16 +26,28 @@ function AddTodoModal({ show, setShow }) {
 
     try {
       const addedTodo = await addTodo(newTodo)
+      console.log(addedTodo)
       setTodos([addedTodo, ...todos])
       setMsg({
         type: 'success',
         message: 'Tarea agregada correctamente',
       })
       e.target.reset()
+      setNewTitle('')
     } catch (error) {
       setMsg({
         type: 'danger',
         message: error.message,
+      })
+    }
+  }
+
+  const handleChange = (e) => {
+    setNewTitle(e.target.value)
+    if (!newTitle.match(/^[^\d]*$/)) {
+      setMsg({
+        type: 'danger',
+        message: 'El título no puede contener números',
       })
     }
   }
@@ -54,7 +66,12 @@ function AddTodoModal({ show, setShow }) {
           )}
           <Form.Group className="mb-3" controlId="todoTitle">
             <Form.Label>Tarea</Form.Label>
-            <Form.Control type="text" placeholder="Lavar la ropa..." />
+            <Form.Control
+              type="text"
+              placeholder="Lavar la ropa..."
+              value={newTitle}
+              onChange={handleChange}
+            />
           </Form.Group>
           <Form.Check type="checkbox" id="completed" label="Completado" />
         </Modal.Body>
@@ -74,6 +91,8 @@ function AddTodoModal({ show, setShow }) {
 AddTodoModal.propTypes = {
   show: PropTypes.bool.isRequired,
   setShow: PropTypes.func.isRequired,
+  todos: PropTypes.array.isRequired,
+  setTodos: PropTypes.func.isRequired,
 }
 
 export default AddTodoModal
