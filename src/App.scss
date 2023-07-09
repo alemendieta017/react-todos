@@ -1,0 +1,84 @@
+@import 'custom.scss';
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
+
+.page {
+  width: 100%;
+  height: 100vh;
+  padding: 2rem 0;
+  overflow: scroll;
+  background-color: #ffffff;
+  opacity: 1;
+  background-image: linear-gradient(135deg, #d5d5d5 25%, transparent 25%),
+    linear-gradient(225deg, #d5d5d5 25%, transparent 25%),
+    linear-gradient(45deg, #d5d5d5 25%, transparent 25%),
+    linear-gradient(315deg, #d5d5d5 25%, #ffffff 25%);
+  background-position: 6px 0, 6px 0, 0 0, 0 0;
+  background-size: 6px 6px;
+  background-repeat: repeat;
+}
+.title {
+  background-color: $primary;
+  color: white;
+  font-size: 1.5rem;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  border-radius: 20px;
+  font-family: 'Lilita One', cursive;
+}
+
+.icons-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  i {
+    font-size: 1rem;
+    margin: 0 0.5rem;
+    color: $secondary;
+  }
+
+  i:last-child {
+    color: $danger;
+  }
+
+  i:first-child {
+    color: $success;
+  }
+}
+
+input[type='checkbox'] {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+input[type='checkbox']:checked {
+  background-color: $success !important;
+  border-color: $success !important;
+  color: $success !important;
+}
+
+@media screen and (min-width: 768px) {
+  .title {
+    text-align: center;
+    background-color: $primary;
+    color: white;
+    font-size: 2rem;
+    padding: 1rem 3rem;
+    margin: 0;
+    border-radius: 20px;
+  }
+
+  .icons-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    i {
+      font-size: 2.5rem;
+      margin: 0 1rem;
+      color: $secondary;
+    }
+  }
+}
